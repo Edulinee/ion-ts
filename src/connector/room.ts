@@ -319,7 +319,7 @@ class RoomGRPCClient extends EventEmitter {
     request.setJoin(join);
     this._client.send(request);
 
-    return new Promise<JoinResult>((resolve, reject) => {
+    return new Promise<JoinResult>((resolve) => {
       const handler = (result: JoinResult) => {
         resolve(result);
         this.removeListener('join-reply', handler);
@@ -344,7 +344,7 @@ class RoomGRPCClient extends EventEmitter {
 
     this._client.send(request);
 
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<string>((resolve) => {
       const handler = (reason: string) => {
         resolve(reason);
         this.removeListener('leave-reply', handler);

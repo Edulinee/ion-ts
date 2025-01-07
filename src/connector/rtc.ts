@@ -319,6 +319,7 @@ class RTCGRPCSignal implements Signal {
             success: subscription?.getSuccess() || false,
             error: subscription?.getError(),
           });
+          break;
         case pb.Reply.PayloadCase.ERROR:
           break;
       }
@@ -402,7 +403,7 @@ class RTCGRPCSignal implements Signal {
     }
     request.setDescription(dest);
     this._client.send(request);
-    return new Promise<RTCSessionDescriptionInit>((resolve, reject) => {
+    return new Promise<RTCSessionDescriptionInit>((resolve) => {
       const handler = (desc: RTCSessionDescriptionInit) => {
         resolve(desc);
         this._event.removeListener('description', handler);
@@ -459,7 +460,7 @@ class RTCGRPCSignal implements Signal {
     request.setSubscription(subscription);
     this._client.send(request);
 
-    return new Promise<Result>((resolve, reject) => {
+    return new Promise<Result>((resolve) => {
       const handler = (res: Result) => {
         resolve(res);
         this._event.removeListener('subscription', handler);

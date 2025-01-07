@@ -178,7 +178,13 @@ export class LocalStream extends MediaStream {
         ...VideoConstraints[constraints.resolution].resolution,
       };
     }
-    return constraints.video as MediaTrackConstraints;
+    if (constraints.video === true) {
+      return {} as MediaTrackConstraints;
+    } else if (constraints.video === false || constraints.video === undefined) {
+      return {} as MediaTrackConstraints;
+    } else {
+      return constraints.video as MediaTrackConstraints;
+    }
   }
 
   private getTrack(kind: 'audio' | 'video') {
@@ -387,7 +393,7 @@ export class LocalStream extends MediaStream {
       streamId: this.id,
       layers,
     };
-    const callStr = JSON.stringify(call);
+
 
     if (this.api) {
       if (this.api.readyState !== 'open') {

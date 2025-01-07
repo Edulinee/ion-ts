@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 import { EventEmitter } from 'events';
 import { Signal } from '.';
 import { grpc } from '@improbable-eng/grpc-web';
@@ -9,11 +9,11 @@ import { Uint8ArrayToJSONString } from './utils';
 
 class IonSFUGRPCWebSignal implements Signal {
   protected client: grpc.Client<pb.SignalRequest, pb.SignalReply>;
-  private _connected: boolean = false;
+
   private _event: EventEmitter;
-  private _onopen?: () => void;
+ // private _onopen?: () => void;
   private _onclose?: (ev: Event) => void;
-  private _onerror?: (error: Event) => void;
+  //private _onerror?: (error: Event) => void;
   onnegotiate?: (jsep: RTCSessionDescriptionInit) => void;
   ontrickle?: (trickle: Trickle) => void;
   constructor(uri: string, metadata?: grpc.Metadata) {
@@ -23,7 +23,8 @@ class IonSFUGRPCWebSignal implements Signal {
       transport: grpc.WebsocketTransport(),
     }) as grpc.Client<pb.SignalRequest, pb.SignalReply>;
 
-    client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
+    client.onEnd((status: grpc.Code, statusMessage: string, _trailers: grpc.Metadata) => {
+
       this._onclose?.call(this, new CustomEvent('sfu', { detail: { status, statusMessage } }));
     });
 
@@ -69,7 +70,7 @@ class IonSFUGRPCWebSignal implements Signal {
     request.setJoin(join);
     this.client.send(request);
 
-    return new Promise<RTCSessionDescriptionInit>((resolve, reject) => {
+    return new Promise<RTCSessionDescriptionInit>((resolve) => {
       const handler = (desc: RTCSessionDescriptionInit) => {
         resolve({ type: 'answer', sdp: desc.sdp });
         this._event.removeListener('join-reply', handler);
@@ -87,13 +88,13 @@ class IonSFUGRPCWebSignal implements Signal {
   }
 
   offer(offer: RTCSessionDescriptionInit) {
-    const id = uuidv4();
+
     const request = new pb.SignalRequest();
     const buffer = Uint8Array.from(JSON.stringify(offer), (c) => c.charCodeAt(0));
     request.setDescription(buffer);
     this.client.send(request);
 
-    return new Promise<RTCSessionDescriptionInit>((resolve, reject) => {
+    return new Promise<RTCSessionDescriptionInit>((resolve) => {
       const handler = (desc: RTCSessionDescriptionInit) => {
         resolve({ type: 'answer', sdp: desc.sdp });
         this._event.removeListener('description', handler);
@@ -117,11 +118,11 @@ class IonSFUGRPCWebSignal implements Signal {
     if (this.client) {
       onopen();
     }
-    this._onopen = onopen;
   }
 
-  set onerror(onerror: (error: Event) => void) {
-    this._onerror = onerror;
+
+  set onerror(_onerror: (error: Event) => void) {
+    // Пустая реализация, так как обработка ошибок идет через events
   }
 
   set onclose(onclose: (ev: Event) => void) {

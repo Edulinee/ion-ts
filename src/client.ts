@@ -54,7 +54,7 @@ export class Transport {
       }
     };
 
-    this.pc.oniceconnectionstatechange = async (e) => {
+    this.pc.oniceconnectionstatechange = async () => {
       // iOS iceConnectionState can go straight to "failed" without emitting "disconnected"
       if (this.pc.iceConnectionState === 'disconnected' || this.pc.iceConnectionState === 'failed') {
         if (this.pc.restartIce !== undefined) {
@@ -222,7 +222,7 @@ export default class Client {
     } catch (err) {
       /* tslint:disable-next-line:no-console */
       console.error(err);
-      if (this.onerrnegotiate) this.onerrnegotiate(Role.sub, err, description, answer);
+      if (this.onerrnegotiate) this.onerrnegotiate(Role.sub, err as Error, description, answer);
     }
   }
 
@@ -245,7 +245,7 @@ export default class Client {
     } catch (err) {
       /* tslint:disable-next-line:no-console */
       console.error(err);
-      if (this.onerrnegotiate) this.onerrnegotiate(Role.pub, err, offer, answer);
+      if (this.onerrnegotiate) this.onerrnegotiate(Role.pub, err as Error, offer, answer);
     }
   }
 
