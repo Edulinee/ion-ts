@@ -9,12 +9,23 @@ class IonSFUJSONRPCSignal implements Signal {
   private _onerror?: (error: Event) => void;
   onnegotiate?: (jsep: RTCSessionDescriptionInit) => void;
   ontrickle?: (trickle: Trickle) => void;
+  private token?: string;
 
   private _notifyhandlers: { [method: string]: (params: any) => void };
 
-  constructor(uri: string) {
+  constructor(uri: string, token?: string) {
     this.socket = new WebSocket(uri);
     this._notifyhandlers = {};
+
+    this.token = token;
+    console.log("[Auth] Received token:", this.token);
+    const wsUri = new URL(uri);
+    if (token) {
+      wsUri.searchParams.append('token', token);
+    }
+
+    this.socket = new WebSocket(wsUri.toString());
+
 
     this.socket.addEventListener('open', () => {
       if (this._onopen) this._onopen();
