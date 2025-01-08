@@ -3050,7 +3050,7 @@ proto.room.LeaveRequest.prototype.toObject = function(opt_includeInstance) {
 proto.room.LeaveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     sid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, "")
+    token: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -3093,7 +3093,7 @@ proto.room.LeaveRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setToken(value);
       break;
     default:
       reader.skipField();
@@ -3131,7 +3131,7 @@ proto.room.LeaveRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUid();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -3160,10 +3160,10 @@ proto.room.LeaveRequest.prototype.setSid = function(value) {
 
 
 /**
- * optional string uid = 2;
+ * optional string token = 2;
  * @return {string}
  */
-proto.room.LeaveRequest.prototype.getUid = function() {
+proto.room.LeaveRequest.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -3172,7 +3172,7 @@ proto.room.LeaveRequest.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.room.LeaveRequest} returns this
  */
-proto.room.LeaveRequest.prototype.setUid = function(value) {
+proto.room.LeaveRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -3391,7 +3391,7 @@ proto.room.Peer.prototype.toObject = function(opt_includeInstance) {
 proto.room.Peer.toObject = function(includeInstance, msg) {
   var f, obj = {
     sid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     displayname: jspb.Message.getFieldWithDefault(msg, 3, ""),
     extrainfo: msg.getExtrainfo_asB64(),
     destination: jspb.Message.getFieldWithDefault(msg, 5, ""),
@@ -3442,7 +3442,7 @@ proto.room.Peer.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setToken(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -3512,7 +3512,7 @@ proto.room.Peer.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUid();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -3606,10 +3606,10 @@ proto.room.Peer.prototype.setSid = function(value) {
 
 
 /**
- * optional string uid = 2;
+ * optional string token = 2;
  * @return {string}
  */
-proto.room.Peer.prototype.getUid = function() {
+proto.room.Peer.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -3618,7 +3618,7 @@ proto.room.Peer.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.room.Peer} returns this
  */
-proto.room.Peer.prototype.setUid = function(value) {
+proto.room.Peer.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -6851,7 +6851,7 @@ proto.room.RemovePeerRequest.prototype.toObject = function(opt_includeInstance) 
 proto.room.RemovePeerRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     sid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, "")
+    token: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6894,7 +6894,7 @@ proto.room.RemovePeerRequest.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setToken(value);
       break;
     default:
       reader.skipField();
@@ -6932,7 +6932,7 @@ proto.room.RemovePeerRequest.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getUid();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -6961,10 +6961,10 @@ proto.room.RemovePeerRequest.prototype.setSid = function(value) {
 
 
 /**
- * optional string uid = 2;
+ * optional string token = 2;
  * @return {string}
  */
-proto.room.RemovePeerRequest.prototype.getUid = function() {
+proto.room.RemovePeerRequest.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -6973,7 +6973,7 @@ proto.room.RemovePeerRequest.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.room.RemovePeerRequest} returns this
  */
-proto.room.RemovePeerRequest.prototype.setUid = function(value) {
+proto.room.RemovePeerRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 

@@ -918,7 +918,7 @@ proto.sfu.JoinRequest.prototype.toObject = function(opt_includeInstance) {
 proto.sfu.JoinRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     sid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     description: msg.getDescription_asB64(),
     configMap: (f = msg.getConfigMap()) ? f.toObject(includeInstance, undefined) : []
   };
@@ -963,7 +963,7 @@ proto.sfu.JoinRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setToken(value);
       break;
     case 3:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
@@ -1011,7 +1011,7 @@ proto.sfu.JoinRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUid();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -1051,10 +1051,10 @@ proto.sfu.JoinRequest.prototype.setSid = function(value) {
 
 
 /**
- * optional string uid = 2;
+ * optional string token = 2;
  * @return {string}
  */
-proto.sfu.JoinRequest.prototype.getUid = function() {
+proto.sfu.JoinRequest.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1063,7 +1063,7 @@ proto.sfu.JoinRequest.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.sfu.JoinRequest} returns this
  */
-proto.sfu.JoinRequest.prototype.setUid = function(value) {
+proto.sfu.JoinRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 

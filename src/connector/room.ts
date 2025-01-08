@@ -81,7 +81,7 @@ export enum Direction {
  */
 export interface Peer {
   sid: string;
-  uid: string;
+  token: string; //  uid на token
   displayname: string;
   extrainfo: Uint8Array | string;
   destination: string;
@@ -155,11 +155,12 @@ export class Room implements Service {
   }
 
   async join(peer: Peer, password: string | undefined): Promise<JoinResult | undefined> {
+    console.log("[Room] Joining with token:", peer.token);
     return this._rpc?.join(peer, password);
   }
 
-  async leave(sid: string, uid: string): Promise<string | undefined> {
-    return this._rpc?.leave(sid, uid);
+  async leave(sid: string, token: string): Promise<string | undefined> {
+    return this._rpc?.leave(sid, token);
   }
 
   async message(sid: string, from: string, to: string, mineType: string, data: Map<string, any>): Promise<void> {
@@ -246,7 +247,7 @@ class RoomGRPCClient extends EventEmitter {
               break;
           }
           const peer = {
-            uid: evt?.getPeer()?.getUid() || '',
+            token: evt?.getPeer()?.getToken() || '',
             sid: evt?.getPeer()?.getSid() || '',
             displayname: evt?.getPeer()?.getDisplayname() || '',
             extrainfo: evt?.getPeer()?.getExtrainfo() || '',
@@ -302,7 +303,7 @@ class RoomGRPCClient extends EventEmitter {
     const join = new room.JoinRequest();
     const p = new room.Peer();
 
-    p.setUid(peer.uid);
+    p.setToken(peer.token);
     p.setSid(peer.sid);
     p.setDisplayname(peer.displayname);
     p.setExtrainfo(peer.extrainfo);
@@ -332,14 +333,14 @@ class RoomGRPCClient extends EventEmitter {
    * leave a session/room
    * @date 2021-11-03
    * @param {any} sid:string
-   * @param {any} uid:string
+   * @param {any} token:string
    * @returns
    */
-  async leave(sid: string, uid: string) {
+  async leave(sid: string, token: string) {
     const request = new room.Request();
     const leave = new room.LeaveRequest();
     leave.setSid(sid);
-    leave.setUid(uid);
+    leave.setToken(token);
     request.setLeave(leave);
 
     this._client.send(request);

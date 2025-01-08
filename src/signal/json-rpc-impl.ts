@@ -9,23 +9,12 @@ class IonSFUJSONRPCSignal implements Signal {
   private _onerror?: (error: Event) => void;
   onnegotiate?: (jsep: RTCSessionDescriptionInit) => void;
   ontrickle?: (trickle: Trickle) => void;
-  private token?: string;
 
   private _notifyhandlers: { [method: string]: (params: any) => void };
 
-  constructor(uri: string, token?: string) {
+  constructor(uri: string) {
     this.socket = new WebSocket(uri);
     this._notifyhandlers = {};
-
-    this.token = token;
-    console.log("[Auth] Received token:", this.token);
-    const wsUri = new URL(uri);
-    if (token) {
-      wsUri.searchParams.append('token', token);
-    }
-
-    this.socket = new WebSocket(wsUri.toString());
-
 
     this.socket.addEventListener('open', () => {
       if (this._onopen) this._onopen();
@@ -92,12 +81,12 @@ class IonSFUJSONRPCSignal implements Signal {
     );
   }
 
-  async join(sid: string, uid: string | null | undefined, offer: RTCSessionDescriptionInit) {
+  async join(sid: string, token: string, offer: RTCSessionDescriptionInit) {
+    console.log("[Signal] Using token for authentication:", token);
     return this.call<RTCSessionDescriptionInit>('join', {
       sid,
-      uid: uid || '',
-      offer,
-      token: this.token // Добавляем токен
+      token, //  uid на token
+      offer
     });
   }
 

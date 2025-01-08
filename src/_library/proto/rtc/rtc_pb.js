@@ -380,7 +380,7 @@ proto.rtc.JoinRequest.prototype.toObject = function(opt_includeInstance) {
 proto.rtc.JoinRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     sid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     configMap: (f = msg.getConfigMap()) ? f.toObject(includeInstance, undefined) : [],
     description: (f = msg.getDescription()) && proto.rtc.SessionDescription.toObject(includeInstance, f)
   };
@@ -425,7 +425,7 @@ proto.rtc.JoinRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setToken(value);
       break;
     case 3:
       var value = msg.getConfigMap();
@@ -474,7 +474,7 @@ proto.rtc.JoinRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUid();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -515,10 +515,10 @@ proto.rtc.JoinRequest.prototype.setSid = function(value) {
 
 
 /**
- * optional string uid = 2;
+ * optional string token = 2;
  * @return {string}
  */
-proto.rtc.JoinRequest.prototype.getUid = function() {
+proto.rtc.JoinRequest.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -527,7 +527,7 @@ proto.rtc.JoinRequest.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.rtc.JoinRequest} returns this
  */
-proto.rtc.JoinRequest.prototype.setUid = function(value) {
+proto.rtc.JoinRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -1833,7 +1833,7 @@ proto.rtc.TrackEvent.prototype.toObject = function(opt_includeInstance) {
 proto.rtc.TrackEvent.toObject = function(includeInstance, msg) {
   var f, obj = {
     state: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     tracksList: jspb.Message.toObjectList(msg.getTracksList(),
     proto.rtc.TrackInfo.toObject, includeInstance)
   };
@@ -1878,7 +1878,7 @@ proto.rtc.TrackEvent.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setToken(value);
       break;
     case 3:
       var value = new proto.rtc.TrackInfo;
@@ -1921,7 +1921,7 @@ proto.rtc.TrackEvent.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUid();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -1967,10 +1967,10 @@ proto.rtc.TrackEvent.prototype.setState = function(value) {
 
 
 /**
- * optional string uid = 2;
+ * optional string token = 2;
  * @return {string}
  */
-proto.rtc.TrackEvent.prototype.getUid = function() {
+proto.rtc.TrackEvent.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1979,7 +1979,7 @@ proto.rtc.TrackEvent.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.rtc.TrackEvent} returns this
  */
-proto.rtc.TrackEvent.prototype.setUid = function(value) {
+proto.rtc.TrackEvent.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 

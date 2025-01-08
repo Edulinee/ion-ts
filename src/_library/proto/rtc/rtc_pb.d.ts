@@ -7,8 +7,8 @@ export class JoinRequest extends jspb.Message {
   getSid(): string;
   setSid(value: string): void;
 
-  getUid(): string;
-  setUid(value: string): void;
+  getToken(): string;
+  setToken(value: string): void;
 
   getConfigMap(): jspb.Map<string, string>;
   clearConfigMap(): void;
@@ -30,7 +30,7 @@ export class JoinRequest extends jspb.Message {
 export namespace JoinRequest {
   export type AsObject = {
     sid: string;
-    uid: string;
+    token: string;
     configMap: Array<[string, string]>;
     description?: SessionDescription.AsObject;
   };
@@ -210,8 +210,8 @@ export class TrackEvent extends jspb.Message {
   getState(): TrackEvent.StateMap[keyof TrackEvent.StateMap];
   setState(value: TrackEvent.StateMap[keyof TrackEvent.StateMap]): void;
 
-  getUid(): string;
-  setUid(value: string): void;
+  getToken(): string;
+  setToken(value: string): void;
 
   clearTracksList(): void;
   getTracksList(): Array<TrackInfo>;
@@ -231,7 +231,7 @@ export class TrackEvent extends jspb.Message {
 export namespace TrackEvent {
   export type AsObject = {
     state: TrackEvent.StateMap[keyof TrackEvent.StateMap];
-    uid: string;
+    token: string;
     tracksList: Array<TrackInfo.AsObject>;
   };
 

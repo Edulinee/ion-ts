@@ -117,8 +117,8 @@ export class JoinRequest extends jspb.Message {
   getSid(): string;
   setSid(value: string): void;
 
-  getUid(): string;
-  setUid(value: string): void;
+  getToken(): string;
+  setToken(value: string): void;
 
   getDescription(): Uint8Array | string;
   getDescription_asU8(): Uint8Array;
@@ -140,7 +140,7 @@ export class JoinRequest extends jspb.Message {
 export namespace JoinRequest {
   export type AsObject = {
     sid: string;
-    uid: string;
+    token: string;
     description: Uint8Array | string;
     configMap: Array<[string, string]>;
   };

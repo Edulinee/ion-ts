@@ -60,11 +60,11 @@ class IonSFUGRPCWebSignal implements Signal {
     this.client.start(metadata);
   }
 
-  join(sid: string, uid: string, offer: RTCSessionDescriptionInit) {
+  join(sid: string, token: string, offer: RTCSessionDescriptionInit) {
     const request = new pb.SignalRequest();
     const join = new pb.JoinRequest();
     join.setSid(sid);
-    join.setUid(uid);
+    join.setToken(token);
     const buffer = Uint8Array.from(JSON.stringify(offer), (c) => c.charCodeAt(0));
     join.setDescription(buffer);
     request.setJoin(join);

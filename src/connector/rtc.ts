@@ -21,7 +21,7 @@ export enum TrackState {
  */
 export interface TrackEvent {
   state: TrackState;
-  uid: string;
+  token: string;
   tracks: TrackInfo[];
 }
 
@@ -124,13 +124,13 @@ export class RTC implements Service {
    * join rtc session
    * @date 2021-11-03
    * @param {any} sid:string
-   * @param {any} uid:string
+   * @param {any} token:string
    * @param {any} config:JoinConfig|undefined
    * @returns
    */
-  async join(sid: string, uid: string, config: JoinConfig | undefined) {
+  async join(sid: string, token: string, config: JoinConfig | undefined) {
     this._sig!.config = config;
-    return this._rtc?.join(sid, uid);
+    return this._rtc?.join(sid, token);
   }
 
   /**
@@ -295,7 +295,7 @@ class RTCGRPCSignal implements Signal {
                 break;
             }
             const tracks = Array<TrackInfo>();
-            const uid = evt?.getUid() || '';
+            const token = evt?.getToken() || '';
             evt?.getTracksList().forEach((rtcTrack: pb.TrackInfo) => {
               tracks.push({
                 id: rtcTrack.getId(),
@@ -310,7 +310,7 @@ class RTCGRPCSignal implements Signal {
                 frame_rate: rtcTrack.getFramerate() || 0,
               });
             });
-            this.ontrackevent?.call(this, { state, tracks, uid });
+            this.ontrackevent?.call(this, { state, tracks, token });
           }
           break;
         case pb.Reply.PayloadCase.SUBSCRIPTION:
@@ -332,15 +332,15 @@ class RTCGRPCSignal implements Signal {
    * join a session
    * @date 2021-11-03
    * @param {any} sid:string
-   * @param {any} uid:null|string
+   * @param {any} token:null|string
    * @param {any} offer:RTCSessionDescriptionInit
    * @returns {any}
    */
-  join(sid: string, uid: null | string, offer: RTCSessionDescriptionInit): Promise<RTCSessionDescriptionInit> {
+  join(sid: string, token: null | string, offer: RTCSessionDescriptionInit): Promise<RTCSessionDescriptionInit> {
     const request = new pb.Request();
     const join = new pb.JoinRequest();
     join.setSid(sid);
-    join.setUid(uid || '');
+    join.setToken(token || '');
     if (this._config) {
       join.getConfigMap().set('NoPublish', this._config?.no_publish ? 'true' : 'false');
       join.getConfigMap().set('NoSubscribe', this._config?.no_subscribe ? 'true' : 'false');

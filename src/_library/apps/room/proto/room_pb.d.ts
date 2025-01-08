@@ -339,8 +339,8 @@ export class LeaveRequest extends jspb.Message {
   getSid(): string;
   setSid(value: string): void;
 
-  getUid(): string;
-  setUid(value: string): void;
+  getToken(): string;
+  setToken(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): LeaveRequest.AsObject;
@@ -355,7 +355,7 @@ export class LeaveRequest extends jspb.Message {
 export namespace LeaveRequest {
   export type AsObject = {
     sid: string;
-    uid: string;
+    token: string;
   };
 }
 
@@ -389,8 +389,8 @@ export class Peer extends jspb.Message {
   getSid(): string;
   setSid(value: string): void;
 
-  getUid(): string;
-  setUid(value: string): void;
+  getToken(): string;
+  setToken(value: string): void;
 
   getDisplayname(): string;
   setDisplayname(value: string): void;
@@ -431,7 +431,7 @@ export class Peer extends jspb.Message {
 export namespace Peer {
   export type AsObject = {
     sid: string;
-    uid: string;
+    token: string;
     displayname: string;
     extrainfo: Uint8Array | string;
     destination: string;
@@ -888,8 +888,8 @@ export class RemovePeerRequest extends jspb.Message {
   getSid(): string;
   setSid(value: string): void;
 
-  getUid(): string;
-  setUid(value: string): void;
+  getToken(): string;
+  setToken(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RemovePeerRequest.AsObject;
@@ -904,7 +904,7 @@ export class RemovePeerRequest extends jspb.Message {
 export namespace RemovePeerRequest {
   export type AsObject = {
     sid: string;
-    uid: string;
+    token: string;
   };
 }
 
