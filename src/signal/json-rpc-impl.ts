@@ -82,7 +82,7 @@ class IonSFUJSONRPCSignal implements Signal {
   }
 
   async join(sid: string, token: string, offer: RTCSessionDescriptionInit) {
-    console.log("[Signal] Using token for authentication:", token);
+    
     return this.call<RTCSessionDescriptionInit>('join', {
       sid,
       token, //  uid на token
