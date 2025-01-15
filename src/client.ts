@@ -101,7 +101,7 @@ export default class Client {
   }
 
   async join(sid: string, token: string) {
-    console.log("[Auth] Received token:", token); //  токен
+    //console.log("[Auth] Received token:", token); //  токен
 
     this.transports = {
       [Role.pub]: new Transport(Role.pub, this.signal, this.config),
